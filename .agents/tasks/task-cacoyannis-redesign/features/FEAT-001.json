@@ -2,7 +2,7 @@
   "id": "FEAT-001",
   "type": "feat",
   "description": "Complete Hero section redesign - replace dark video background hero with a clean, editorial, white-background typographic hero inspired by Refokus/Clay/Studio Freight. Remove broken video reference, implement premium typography composition with better hierarchy, add subtle CSS-generated visual elements, and integrate advanced GSAP entrance animations.",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "Completely rewrite components/Home/Hero.tsx - remove the dark video background approach and replace with a white/light editorial layout",
     "Design typography composition: Use a large but NOT oversized headline (text-editorial-lg rather than text-editorial-xl), with balanced spacing. The hero message should be: 'We design and build exceptional websites and digital experiences'",
@@ -32,5 +32,5 @@
     "npm run lint"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "Build and lint pass cleanly. Hero uses inline style for font-size clamp since Tailwind v4 arbitrary values are straightforward but inline gives clearest control. The component uses useCallback for mouse handler to satisfy exhaustive-deps. Decorative shapes use accent color at very low opacity (4-12%) for subtlety."
 }
