@@ -5,6 +5,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useConsultation } from "@/components/ConsultationModal/ConsultationContext";
+import { MagneticButton } from "@/components/MagneticButton";
 import { serviceDetails } from "@/lib/services-data";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -17,16 +18,16 @@ interface ServiceCTAProps {
 export function ServiceCTA({ serviceTitle, relatedServices }: ServiceCTAProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
   const relatedRef = useRef<HTMLDivElement>(null);
   const { openModal } = useConsultation();
 
   useEffect(() => {
     const section = sectionRef.current;
     const heading = headingRef.current;
-    const button = buttonRef.current;
+    const cta = ctaRef.current;
     const related = relatedRef.current;
-    if (!section || !heading || !button || !related) return;
+    if (!section || !heading || !cta || !related) return;
 
     const ctx = gsap.context(() => {
       // Word reveal for heading
@@ -64,7 +65,7 @@ export function ServiceCTA({ serviceTitle, relatedServices }: ServiceCTAProps) {
       });
 
       tl.from(
-        button,
+        cta,
         {
           y: 30,
           opacity: 0,
@@ -106,13 +107,15 @@ export function ServiceCTA({ serviceTitle, relatedServices }: ServiceCTAProps) {
           Ready to start your {serviceTitle} project?
         </h2>
 
-        <button
-          ref={buttonRef}
-          onClick={openModal}
-          className="inline-block bg-accent text-white text-base font-medium px-10 py-4 rounded-sm hover:bg-accent-light transition-colors duration-300 cursor-pointer"
-        >
-          Request Consultation
-        </button>
+        <div ref={ctaRef}>
+          <MagneticButton
+            onClick={openModal}
+            className="inline-block bg-accent text-white text-base font-medium px-10 py-4 rounded-sm hover:bg-accent-light transition-colors duration-300 cursor-pointer"
+            strength={0.3}
+          >
+            Request Consultation
+          </MagneticButton>
+        </div>
 
         {/* Related Services */}
         <div ref={relatedRef} className="mt-20 pt-12 border-t border-border">

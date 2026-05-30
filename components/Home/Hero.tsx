@@ -20,6 +20,18 @@ export default function Hero() {
     if (!section || !heading || !subtitle || !scrollIndicator) return;
 
     const ctx = gsap.context(() => {
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      if (prefersReducedMotion) {
+        // Show content immediately without animations
+        gsap.set(heading, { opacity: 1 });
+        gsap.set(subtitle, { opacity: 1 });
+        gsap.set(scrollIndicator, { opacity: 1 });
+        return;
+      }
+
       // Split heading into words and animate
       const text = heading.textContent || "";
       heading.textContent = "";
@@ -111,6 +123,7 @@ export default function Hero() {
           autoPlay
           loop
           playsInline
+          preload="none"
           poster="/images/hero-poster.jpg"
         />
       </div>

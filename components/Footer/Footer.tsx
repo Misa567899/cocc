@@ -5,6 +5,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { companyInfo, services } from "@/lib/constants";
+import { MagneticButton } from "@/components/MagneticButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -87,12 +88,14 @@ export default function Footer() {
           >
             Let&apos;s Build Something Exceptional
           </h2>
-          <Link
-            href="/contact"
-            className="inline-block bg-accent text-white text-sm md:text-base font-medium px-8 py-4 rounded-sm hover:bg-accent-light transition-colors duration-300"
-          >
-            Start a Project
-          </Link>
+          <MagneticButton as="div" strength={0.3}>
+            <Link
+              href="/contact"
+              className="inline-block bg-accent text-white text-sm md:text-base font-medium px-8 py-4 rounded-sm hover:bg-accent-light transition-colors duration-300"
+            >
+              Start a Project
+            </Link>
+          </MagneticButton>
         </div>
 
         {/* Footer Columns */}
@@ -183,10 +186,11 @@ export default function Footer() {
           <p className="text-xs text-white/40">
             &copy; 2024 {companyInfo.name}. All rights reserved.
           </p>
-          <button
+          <MagneticButton
             onClick={scrollToTop}
             className="text-xs text-white/40 hover:text-white transition-colors duration-300 flex items-center gap-2 cursor-pointer"
             aria-label="Back to top"
+            strength={0.3}
           >
             <span>Back to top</span>
             <svg
@@ -203,7 +207,7 @@ export default function Footer() {
                 d="M5 15l7-7 7 7"
               />
             </svg>
-          </button>
+          </MagneticButton>
         </div>
       </div>
     </footer>

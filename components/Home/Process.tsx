@@ -73,6 +73,14 @@ export default function Process() {
     if (!section || !heading || !track || !container || !progress) return;
 
     const ctx = gsap.context(() => {
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      if (prefersReducedMotion) {
+        return;
+      }
+
       // Heading word reveal
       const headingText = heading.textContent || "";
       heading.textContent = "";

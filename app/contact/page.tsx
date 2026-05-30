@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main>
+    <main id="main-content">
       <ContactHero />
       <ContactCards />
       <ContactMap />

@@ -37,6 +37,14 @@ export default function DesignShowcase() {
       return;
 
     const ctx = gsap.context(() => {
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      if (prefersReducedMotion) {
+        return;
+      }
+
       // Heading reveal on scroll
       const headingText = heading.textContent || "";
       heading.textContent = "";

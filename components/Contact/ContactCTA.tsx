@@ -4,20 +4,21 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useConsultation } from "@/components/ConsultationModal/ConsultationContext";
+import { MagneticButton } from "@/components/MagneticButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function ContactCTA() {
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
   const { openModal } = useConsultation();
 
   useEffect(() => {
     const section = sectionRef.current;
     const heading = headingRef.current;
-    const button = buttonRef.current;
-    if (!section || !heading || !button) return;
+    const cta = ctaRef.current;
+    if (!section || !heading || !cta) return;
 
     const ctx = gsap.context(() => {
       // Word reveal for heading
@@ -55,7 +56,7 @@ export function ContactCTA() {
       });
 
       tl.from(
-        button,
+        cta,
         {
           y: 30,
           opacity: 0,
@@ -78,13 +79,15 @@ export function ContactCTA() {
         >
           Let&apos;s Create Something Remarkable
         </h2>
-        <button
-          ref={buttonRef}
-          onClick={openModal}
-          className="inline-block bg-accent text-white text-base font-medium px-10 py-4 rounded-sm hover:bg-accent-light transition-colors duration-300 cursor-pointer"
-        >
-          Request Consultation
-        </button>
+        <div ref={ctaRef}>
+          <MagneticButton
+            onClick={openModal}
+            className="inline-block bg-accent text-white text-base font-medium px-10 py-4 rounded-sm hover:bg-accent-light transition-colors duration-300 cursor-pointer"
+            strength={0.3}
+          >
+            Request Consultation
+          </MagneticButton>
+        </div>
       </div>
     </section>
   );

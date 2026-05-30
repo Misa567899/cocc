@@ -7,6 +7,7 @@ import { companyInfo, navigationLinks } from "@/lib/constants";
 import { MegaMenu } from "./MegaMenu";
 import { MobileMenu } from "./MobileMenu";
 import { ConsultationModal } from "@/components/ConsultationModal/ConsultationModal";
+import { MagneticButton } from "@/components/MagneticButton";
 import { useConsultation } from "@/components/ConsultationModal/ConsultationContext";
 
 export function Navigation() {
@@ -110,12 +111,13 @@ export function Navigation() {
 
             {/* CTA + Mobile Toggle */}
             <div className="flex items-center gap-4">
-              <button
+              <MagneticButton
                 onClick={handleOpenModal}
                 className="hidden lg:block bg-accent text-white text-sm font-medium px-6 py-3 rounded-sm hover:bg-accent-light transition-colors duration-300 cursor-pointer"
+                strength={0.3}
               >
                 Request Consultation
-              </button>
+              </MagneticButton>
 
               {/* Hamburger */}
               <button

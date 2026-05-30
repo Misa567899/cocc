@@ -44,7 +44,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
   }
 
   return (
-    <main>
+    <main id="main-content">
       <ServiceHero title={service.title} headline={service.headline} />
       <ServiceContent
         description={service.description}

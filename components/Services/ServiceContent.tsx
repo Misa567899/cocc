@@ -27,6 +27,11 @@ export function ServiceContent({
     const procEl = processRef.current;
     if (!descEl || !capEl || !procEl) return;
 
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReducedMotion) return;
+
     const ctx = gsap.context(() => {
       // Description paragraphs fade up
       const paragraphs = descEl.querySelectorAll("p");
