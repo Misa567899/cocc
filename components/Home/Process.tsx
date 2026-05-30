@@ -162,7 +162,7 @@ export default function Process() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-gray-50 border-t border-border"
+      className="process-section relative bg-gray-50 border-t border-border"
     >
       {/* Progress bar */}
       <div className="fixed top-0 left-0 right-0 z-30 pointer-events-none">
@@ -173,7 +173,7 @@ export default function Process() {
         />
       </div>
 
-      <div ref={containerRef} className="h-screen flex flex-col justify-center overflow-hidden">
+      <div ref={containerRef} className="process-container h-screen flex flex-col justify-center overflow-hidden">
         {/* Heading */}
         <div className="px-6 lg:px-12 pt-12 pb-8 max-w-[1440px] mx-auto w-full">
           <h2 ref={headingRef} className="text-editorial-md text-foreground">
@@ -184,7 +184,7 @@ export default function Process() {
         {/* Horizontal track */}
         <div
           ref={trackRef}
-          className="flex items-stretch gap-6 lg:gap-8 px-6 lg:px-12 pb-12"
+          className="process-track flex items-stretch gap-6 lg:gap-8 px-6 lg:px-12 pb-12"
           style={{ width: "fit-content" }}
         >
           {processSteps.map((step) => (

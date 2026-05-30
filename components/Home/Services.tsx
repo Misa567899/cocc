@@ -104,6 +104,18 @@ export default function Services() {
     if (!section || !heading) return;
 
     const ctx = gsap.context(() => {
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      if (prefersReducedMotion) {
+        // Show elements in their final state immediately
+        gsap.set(heading, { opacity: 1 });
+        const cards = section.querySelectorAll(".service-card");
+        gsap.set(cards, { opacity: 1, y: 0 });
+        return;
+      }
+
       // Heading word reveal
       const headingText = heading.textContent || "";
       heading.textContent = "";

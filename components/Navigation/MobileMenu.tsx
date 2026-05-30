@@ -18,6 +18,7 @@ export function MobileMenu({
 }: MobileMenuProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLElement[]>([]);
+  const triggerRef = useRef<HTMLElement | null>(null);
   const [servicesExpanded, setServicesExpanded] = useState(false);
 
   useEffect(() => {
@@ -25,6 +26,9 @@ export function MobileMenu({
     if (!overlay) return;
 
     if (isOpen) {
+      // Store the element that triggered the menu
+      triggerRef.current = document.activeElement as HTMLElement;
+
       // Lock body scroll
       document.body.style.overflow = "hidden";
       gsap.set(overlay, { display: "flex" });
@@ -45,6 +49,15 @@ export function MobileMenu({
           stagger: 0.08,
           delay: 0.2,
           ease: "power3.out",
+          onComplete: () => {
+            // Move focus to first link
+            const focusable = overlay.querySelectorAll<HTMLElement>(
+              'a, button, [tabindex]:not([tabindex="-1"])'
+            );
+            if (focusable.length > 0) {
+              focusable[0].focus();
+            }
+          },
         }
       );
     } else {
@@ -58,6 +71,11 @@ export function MobileMenu({
         },
       });
       setServicesExpanded(false);
+
+      // Return focus to trigger element
+      if (triggerRef.current && triggerRef.current.focus) {
+        triggerRef.current.focus();
+      }
     }
 
     return () => {
@@ -74,6 +92,40 @@ export function MobileMenu({
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
+
+  // Focus trap
+  useEffect(() => {
+    if (!isOpen) return;
+    const overlay = overlayRef.current;
+    if (!overlay) return;
+
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+
+      const focusableElements = overlay.querySelectorAll<HTMLElement>(
+        'a, button, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusableElements.length === 0) return;
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        }
+      } else {
+        if (document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleTab);
+    return () => document.removeEventListener("keydown", handleTab);
+  }, [isOpen]);
 
   const setLinkRef = useCallback((el: HTMLElement | null, index: number) => {
     if (el) linksRef.current[index] = el;

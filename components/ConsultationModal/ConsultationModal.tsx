@@ -12,6 +12,7 @@ interface ConsultationModalProps {
 export function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
   const backdropRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const backdrop = backdropRef.current;
@@ -19,6 +20,9 @@ export function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
     if (!backdrop || !content) return;
 
     if (isOpen) {
+      // Store the element that triggered the modal
+      triggerRef.current = document.activeElement as HTMLElement;
+
       document.body.style.overflow = "hidden";
       gsap.set(backdrop, { display: "flex" });
       gsap.fromTo(
@@ -29,7 +33,23 @@ export function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
       gsap.fromTo(
         content,
         { scale: 0.9, y: 30, opacity: 0 },
-        { scale: 1, y: 0, opacity: 1, duration: 0.5, ease: "power3.out", delay: 0.1 }
+        {
+          scale: 1,
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          ease: "power3.out",
+          delay: 0.1,
+          onComplete: () => {
+            // Move focus to first focusable element
+            const focusable = content.querySelectorAll<HTMLElement>(
+              'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            if (focusable.length > 0) {
+              focusable[0].focus();
+            }
+          },
+        }
       );
     } else {
       gsap.to(content, {
@@ -49,6 +69,11 @@ export function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
           document.body.style.overflow = "";
         },
       });
+
+      // Return focus to trigger element
+      if (triggerRef.current && triggerRef.current.focus) {
+        triggerRef.current.focus();
+      }
     }
 
     return () => {
@@ -65,6 +90,40 @@ export function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
+
+  // Focus trap
+  useEffect(() => {
+    if (!isOpen) return;
+    const content = contentRef.current;
+    if (!content) return;
+
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+
+      const focusableElements = content.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusableElements.length === 0) return;
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        }
+      } else {
+        if (document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleTab);
+    return () => document.removeEventListener("keydown", handleTab);
+  }, [isOpen]);
 
   const handleBackdropClick = useCallback(
     (e: React.MouseEvent) => {

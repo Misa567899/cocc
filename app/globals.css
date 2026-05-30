@@ -94,6 +94,24 @@ body {
   html {
     scroll-behavior: auto;
   }
+
+  /* Process section: remove h-screen constraint and allow vertical flow */
+  .process-container {
+    height: auto;
+    overflow: visible;
+  }
+
+  .process-track {
+    width: 100%;
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+
+  .process-track .process-card {
+    flex-shrink: 1;
+    width: 100%;
+    max-width: 380px;
+  }
 }
 
 /* Skip link styles */

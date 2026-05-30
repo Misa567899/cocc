@@ -124,7 +124,6 @@ export default function Hero() {
           loop
           playsInline
           preload="none"
-          poster="/images/hero-poster.jpg"
         />
       </div>
 
