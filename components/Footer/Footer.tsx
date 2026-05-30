@@ -84,7 +84,7 @@ export default function Footer() {
         <div className="mb-20 lg:mb-32">
           <h2
             ref={ctaRef}
-            className="text-editorial-lg text-white mb-10"
+            className="text-editorial-md text-white mb-10"
           >
             Let&apos;s Build Something Exceptional
           </h2>
@@ -96,6 +96,11 @@ export default function Footer() {
               Start a Project
             </Link>
           </MagneticButton>
+        </div>
+
+        {/* Visual Separator */}
+        <div className="mb-20 lg:mb-32">
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
         </div>
 
         {/* Footer Columns */}
@@ -171,7 +176,7 @@ export default function Footer() {
                 <li key={service.slug}>
                   <Link
                     href={`/services/${service.slug}`}
-                    className="text-sm text-white/80 hover:text-white transition-colors duration-300"
+                    className="text-sm text-white/80 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block"
                   >
                     {service.name}
                   </Link>

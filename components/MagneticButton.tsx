@@ -37,6 +37,16 @@ export function MagneticButton({
       if (prefersReducedMotion) return;
 
       const rect = el.getBoundingClientRect();
+      // Extend detection area by 20px padding
+      const padding = 20;
+      const isNear =
+        e.clientX >= rect.left - padding &&
+        e.clientX <= rect.right + padding &&
+        e.clientY >= rect.top - padding &&
+        e.clientY <= rect.bottom + padding;
+
+      if (!isNear) return;
+
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
       const x = (e.clientX - centerX) * strength;
@@ -52,6 +62,22 @@ export function MagneticButton({
     [strength]
   );
 
+  const handleMouseEnter = useCallback(() => {
+    const el = elementRef.current;
+    if (!el) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReducedMotion) return;
+
+    gsap.to(el, {
+      scale: 1.03,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  }, []);
+
   const handleMouseLeave = useCallback(() => {
     const el = elementRef.current;
     if (!el) return;
@@ -59,6 +85,7 @@ export function MagneticButton({
     gsap.to(el, {
       x: 0,
       y: 0,
+      scale: 1,
       duration: 0.5,
       ease: "elastic.out(1, 0.4)",
     });
@@ -68,7 +95,7 @@ export function MagneticButton({
     const el = elementRef.current;
     return () => {
       if (el) {
-        gsap.set(el, { x: 0, y: 0 });
+        gsap.set(el, { x: 0, y: 0, scale: 1 });
       }
     };
   }, []);
@@ -79,6 +106,7 @@ export function MagneticButton({
     ref: elementRef,
     className,
     onMouseMove: handleMouseMove,
+    onMouseEnter: handleMouseEnter,
     onMouseLeave: handleMouseLeave,
     style: { display: "inline-block" },
   };

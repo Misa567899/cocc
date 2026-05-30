@@ -202,7 +202,7 @@ export default function Services() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-32 lg:py-48">
+    <section ref={sectionRef} className="py-32 lg:py-48 border-t border-border">
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
         <h2
           ref={headingRef}

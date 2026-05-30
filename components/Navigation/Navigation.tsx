@@ -66,9 +66,9 @@ export function Navigation() {
     <>
       <header
         ref={headerRef}
-        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-background/95 backdrop-blur-md border-b border-border"
+            ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm"
             : "bg-transparent"
         }`}
         style={{ opacity: 0 }}
@@ -78,7 +78,7 @@ export function Navigation() {
             {/* Logo */}
             <Link
               href="/"
-              className="text-foreground font-bold text-sm tracking-[0.2em] uppercase hover:text-accent transition-colors duration-300"
+              className="text-foreground font-bold text-sm tracking-[0.15em] uppercase hover:text-accent transition-colors duration-300"
             >
               {companyInfo.name}
             </Link>

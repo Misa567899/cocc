@@ -43,7 +43,7 @@ body {
 
 /* Scrollbar styling */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
@@ -52,19 +52,19 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--color-accent);
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 /* Utility classes for editorial typography */
 .text-editorial-xl {
-  font-size: clamp(3rem, 12vw, 12rem);
+  font-size: clamp(3rem, 10vw, 9rem);
   line-height: 0.85;
   letter-spacing: -0.03em;
   font-weight: 700;
 }
 
 .text-editorial-lg {
-  font-size: clamp(2.5rem, 8vw, 8rem);
+  font-size: clamp(2.5rem, 7vw, 7rem);
   line-height: 0.9;
   letter-spacing: -0.02em;
   font-weight: 700;
@@ -75,6 +75,24 @@ body {
   line-height: 0.95;
   letter-spacing: -0.02em;
   font-weight: 600;
+}
+
+.text-editorial-sm {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+}
+
+/* Animation keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
 }
 
 /* Performance optimization for heavily animated elements */
