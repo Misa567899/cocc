@@ -2,7 +2,7 @@
   "id": "FEAT-001",
   "type": "feat",
   "description": "Initialize Next.js 15 project with TypeScript, App Router, Tailwind CSS, GSAP, and core project structure. Set up the design system (colors, typography, spacing), global styles, font loading, and the foundational layout including custom cursor, smooth scrolling setup, and base animation utilities.",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "Initialize Next.js 15 project with TypeScript and App Router in /projects/sandbox/cocc using: npx create-next-app@latest . --typescript --tailwind --app --eslint --src-dir=false --import-alias='@/*' --use-npm. If directory not empty, handle appropriately.",
     "Install dependencies: gsap (with ScrollTrigger, ScrollSmoother plugins via @gsap/react or direct), and any other needed packages",
@@ -30,5 +30,5 @@
     "cd /projects/sandbox/cocc && npm run lint"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "Project initialized manually (not via create-next-app) due to existing .git and .agents directories. Used Next.js 15.5.18, Tailwind CSS v4 with @tailwindcss/postcss, gsap 3.12.x. Tailwind v4 uses @theme directive in CSS instead of tailwind.config.js. ESLint uses flat config (eslint.config.mjs). Build and lint pass cleanly. next-env.d.ts is listed in .gitignore by default in newer Next.js but we include it for type support."
 }
