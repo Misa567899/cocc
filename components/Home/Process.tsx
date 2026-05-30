@@ -78,6 +78,15 @@ export default function Process() {
       ).matches;
 
       if (prefersReducedMotion) {
+        // Show all cards in a vertical wrapping layout without horizontal scroll
+        track.style.flexWrap = "wrap";
+        track.style.width = "100%";
+        track.style.gap = "1.5rem";
+        const cards = track.querySelectorAll(".process-card");
+        cards.forEach((card) => {
+          (card as HTMLElement).style.width = "100%";
+          (card as HTMLElement).style.maxWidth = "380px";
+        });
         return;
       }
 
@@ -162,18 +171,27 @@ export default function Process() {
   return (
     <section
       ref={sectionRef}
-      className="process-section relative bg-gray-50 border-t border-border"
+      className="process-section relative bg-white"
     >
+      {/* Gradient separator at top */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/10 to-transparent" />
+
       {/* Progress bar */}
       <div className="fixed top-0 left-0 right-0 z-30 pointer-events-none">
         <div
           ref={progressRef}
-          className="h-[3px] bg-accent origin-left"
-          style={{ transform: "scaleX(0)" }}
+          className="h-1 origin-left"
+          style={{
+            transform: "scaleX(0)",
+            background: "linear-gradient(to right, #050FA3, #1a2fd4)",
+          }}
         />
       </div>
 
-      <div ref={containerRef} className="process-container h-screen flex flex-col justify-center overflow-hidden">
+      <div
+        ref={containerRef}
+        className="process-container h-screen flex flex-col justify-center overflow-hidden"
+      >
         {/* Heading */}
         <div className="px-6 lg:px-12 pt-12 pb-8 max-w-[1440px] mx-auto w-full">
           <h2 ref={headingRef} className="text-editorial-md text-foreground">
@@ -181,33 +199,55 @@ export default function Process() {
           </h2>
         </div>
 
-        {/* Horizontal track */}
-        <div
-          ref={trackRef}
-          className="process-track flex items-stretch gap-6 lg:gap-8 px-6 lg:px-12 pb-12"
-          style={{ width: "fit-content" }}
-        >
-          {processSteps.map((step) => (
-            <div
-              key={step.number}
-              className="process-card flex-shrink-0 w-[300px] lg:w-[380px] bg-white border border-border rounded-xl p-8 lg:p-10 flex flex-col justify-between"
-            >
-              <div>
-                <span className="text-5xl lg:text-6xl font-bold text-accent/20">
-                  {step.number}
-                </span>
-                <h3 className="text-xl lg:text-2xl font-bold text-foreground mt-4 mb-3">
-                  {step.title}
-                </h3>
-                <p className="text-muted text-sm lg:text-base leading-relaxed">
-                  {step.description}
-                </p>
+        {/* Step connector line - runs behind cards */}
+        <div className="relative">
+          <div className="absolute top-1/2 left-0 right-0 h-px border-t border-dashed border-accent/15 -translate-y-1/2 pointer-events-none" />
+
+          {/* Horizontal track */}
+          <div
+            ref={trackRef}
+            className="process-track flex items-stretch gap-6 lg:gap-8 px-6 lg:px-12 pb-12 relative z-10"
+            style={{ width: "fit-content" }}
+          >
+            {processSteps.map((step) => (
+              <div
+                key={step.number}
+                className="process-card group flex-shrink-0 w-[300px] lg:w-[380px] bg-white border border-border rounded-xl p-8 lg:p-10 flex flex-col justify-between shadow-sm hover:shadow-lg hover:scale-[1.02] transition-all duration-300 relative overflow-hidden"
+                style={{ backgroundColor: "white" }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.backgroundColor =
+                    "rgba(5, 15, 163, 0.02)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.backgroundColor =
+                    "white";
+                }}
+              >
+                {/* Accent gradient line on top */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-1 opacity-70 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    background: "linear-gradient(to right, #050FA3, #1a2fd4)",
+                  }}
+                />
+
+                <div>
+                  <span className="text-6xl font-bold text-accent/30 group-hover:text-accent/50 transition-colors duration-300 select-none">
+                    {step.number}
+                  </span>
+                  <h3 className="text-xl lg:text-2xl font-bold text-foreground mt-4 mb-3">
+                    {step.title}
+                  </h3>
+                  <p className="text-muted text-sm lg:text-base leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
+                <div className="mt-8 h-[2px] bg-accent/10 rounded-full overflow-hidden">
+                  <div className="h-full w-full bg-accent scale-x-0 origin-left process-progress" />
+                </div>
               </div>
-              <div className="mt-8 h-[2px] bg-accent/10 rounded-full overflow-hidden">
-                <div className="h-full w-full bg-accent scale-x-0 origin-left process-progress" />
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
