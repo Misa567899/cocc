@@ -71,7 +71,7 @@ function ServiceCard({
     <Link
       ref={cardRef}
       href={`/services/${service.slug}`}
-      className="service-card group relative block bg-white border border-border rounded-xl p-10 lg:p-12 overflow-hidden transition-shadow duration-300"
+      className="service-card group relative block bg-white border border-border rounded-xl p-10 lg:p-12 overflow-hidden"
       style={{
         perspective: "1000px",
         transformStyle: "preserve-3d",

@@ -133,6 +133,10 @@ export default function Process() {
           pin: true,
           scrub: 1,
           anticipatePin: 1,
+          onEnter: () => gsap.to(progress, { opacity: 1, duration: 0.3 }),
+          onLeave: () => gsap.to(progress, { opacity: 0, duration: 0.3 }),
+          onEnterBack: () => gsap.to(progress, { opacity: 1, duration: 0.3 }),
+          onLeaveBack: () => gsap.to(progress, { opacity: 0, duration: 0.3 }),
         },
       });
 
@@ -183,6 +187,7 @@ export default function Process() {
           className="h-1 origin-left"
           style={{
             transform: "scaleX(0)",
+            opacity: 0,
             background: "linear-gradient(to right, #050FA3, #1a2fd4)",
           }}
         />

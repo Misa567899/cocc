@@ -206,36 +206,54 @@ export default function Hero() {
     // Mouse-follow effect on decorative elements
     window.addEventListener("mousemove", handleMouseMove);
 
+    const isVisible = { current: true };
+    const lastPos = { x: 0, y: 0 };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible.current = entry.isIntersecting;
+      },
+      { threshold: 0 }
+    );
+    observer.observe(section);
+
     const animateShapes = () => {
       const { x, y } = mousePos.current;
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
-      const deltaX = (x - centerX) / centerX;
-      const deltaY = (y - centerY) / centerY;
 
-      gsap.to(shape1, {
-        x: deltaX * 15,
-        y: deltaY * 10,
-        duration: 1.2,
-        ease: "power2.out",
-        overwrite: "auto",
-      });
+      // Skip if section is not visible or mouse hasn't moved
+      if (isVisible.current && (x !== lastPos.x || y !== lastPos.y)) {
+        lastPos.x = x;
+        lastPos.y = y;
 
-      gsap.to(shape2, {
-        x: deltaX * -20,
-        y: deltaY * -12,
-        duration: 1.4,
-        ease: "power2.out",
-        overwrite: "auto",
-      });
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+        const deltaX = (x - centerX) / centerX;
+        const deltaY = (y - centerY) / centerY;
 
-      gsap.to(shape3, {
-        x: deltaX * 10,
-        y: deltaY * 8,
-        duration: 1,
-        ease: "power2.out",
-        overwrite: "auto",
-      });
+        gsap.to(shape1, {
+          x: deltaX * 15,
+          y: deltaY * 10,
+          duration: 1.2,
+          ease: "power2.out",
+          overwrite: "auto",
+        });
+
+        gsap.to(shape2, {
+          x: deltaX * -20,
+          y: deltaY * -12,
+          duration: 1.4,
+          ease: "power2.out",
+          overwrite: "auto",
+        });
+
+        gsap.to(shape3, {
+          x: deltaX * 10,
+          y: deltaY * 8,
+          duration: 1,
+          ease: "power2.out",
+          overwrite: "auto",
+        });
+      }
 
       rafId.current = requestAnimationFrame(animateShapes);
     };
@@ -244,6 +262,7 @@ export default function Hero() {
 
     return () => {
       ctx.revert();
+      observer.disconnect();
       window.removeEventListener("mousemove", handleMouseMove);
       if (rafId.current) {
         cancelAnimationFrame(rafId.current);

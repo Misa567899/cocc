@@ -37,16 +37,6 @@ export function MagneticButton({
       if (prefersReducedMotion) return;
 
       const rect = el.getBoundingClientRect();
-      // Extend detection area by 20px padding
-      const padding = 20;
-      const isNear =
-        e.clientX >= rect.left - padding &&
-        e.clientX <= rect.right + padding &&
-        e.clientY >= rect.top - padding &&
-        e.clientY <= rect.bottom + padding;
-
-      if (!isNear) return;
-
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
       const x = (e.clientX - centerX) * strength;
