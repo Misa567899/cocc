@@ -4,6 +4,7 @@ import "./globals.css";
 import { CustomCursor } from "@/components/CustomCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Navigation } from "@/components/Navigation";
+import { ConsultationProvider } from "@/components/ConsultationModal/ConsultationContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -33,9 +34,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-sans antialiased">
-        <CustomCursor />
-        <Navigation />
-        <SmoothScroll>{children}</SmoothScroll>
+        <ConsultationProvider>
+          <CustomCursor />
+          <Navigation />
+          <SmoothScroll>{children}</SmoothScroll>
+        </ConsultationProvider>
       </body>
     </html>
   );

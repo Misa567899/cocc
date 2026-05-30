@@ -7,13 +7,14 @@ import { companyInfo, navigationLinks } from "@/lib/constants";
 import { MegaMenu } from "./MegaMenu";
 import { MobileMenu } from "./MobileMenu";
 import { ConsultationModal } from "@/components/ConsultationModal/ConsultationModal";
+import { useConsultation } from "@/components/ConsultationModal/ConsultationContext";
 
 export function Navigation() {
   const headerRef = useRef<HTMLElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
+  const { isOpen: modalOpen, openModal, closeModal } = useConsultation();
 
   useEffect(() => {
     const header = headerRef.current;
@@ -36,13 +37,13 @@ export function Navigation() {
   }, []);
 
   const handleOpenModal = useCallback(() => {
-    setModalOpen(true);
+    openModal();
     setMobileMenuOpen(false);
-  }, []);
+  }, [openModal]);
 
   const handleCloseModal = useCallback(() => {
-    setModalOpen(false);
-  }, []);
+    closeModal();
+  }, [closeModal]);
 
   const handleToggleMegaMenu = useCallback(() => {
     setMegaMenuOpen((prev) => !prev);
