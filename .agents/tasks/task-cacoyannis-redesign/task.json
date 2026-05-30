@@ -1,0 +1,7 @@
+{
+  "task_id": "task-cacoyannis-redesign",
+  "task_description": "Complete creative redesign of CACOYANNIS LIMITED website from generic agency template to Awwwards-level digital experience. Includes hero redesign, design showcase replacement, services/process enhancements, global design system updates, and final quality pass.",
+  "status": "in_progress",
+  "feature_order": ["FEAT-001", "FEAT-002", "FEAT-003", "FEAT-004", "FEAT-005"],
+  "blocked_reason": null
+}

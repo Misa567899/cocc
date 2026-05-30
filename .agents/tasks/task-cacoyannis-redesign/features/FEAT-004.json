@@ -1,0 +1,47 @@
+{
+  "id": "FEAT-004",
+  "type": "feat",
+  "description": "Global design system updates, typography refinement, navigation polish, footer improvements, enhanced cursor/interactions, and section transitions. This feature handles the cross-cutting visual quality improvements that make the site feel cohesive and premium.",
+  "status": "completed",
+  "steps": [
+    "Update app/globals.css:",
+    "  - Refine editorial typography classes: ensure text-editorial-xl uses a size that works well without breaking layouts (clamp(3.5rem, 10vw, 9rem) instead of 12rem max)",
+    "  - Add a text-editorial-sm class for medium-large text (clamp(1.5rem, 3vw, 2.5rem))",
+    "  - Add smooth section transition utilities: a .section-overlap class that uses negative margin-top with relative z-index for overlapping section effects",
+    "  - Add a subtle body background texture: very faint noise or grain at 1-2% opacity using CSS",
+    "  - Improve scrollbar styling: make it thinner and more subtle",
+    "  - Add custom animation keyframes for floating/breathing effects used by decorative elements",
+    "Update components/Navigation/Navigation.tsx:",
+    "  - Make the logo text slightly larger and bolder for better brand presence",
+    "  - Ensure the navigation background transition is smooth (transparent -> white with blur)",
+    "  - The nav height should be consistent (h-20 is good)",
+    "Update components/Footer/Footer.tsx:",
+    "  - Add a visual separator between the CTA area and the footer columns (a decorative line or gradient)",
+    "  - Ensure the CTA headline uses proper editorial sizing (text-editorial-md, not text-editorial-lg which may be too big for this context)",
+    "  - Add subtle hover animation on the footer service links (underline slides in from left)",
+    "Update components/CustomCursor.tsx:",
+    "  - Add a text state: when hovering over headings or large text, cursor shows a different style (e.g., becomes a small dot with 'View' text)",
+    "  - Ensure the cursor is hidden on touch devices (check for touch support in useEffect and hide if touch)",
+    "  - Add smooth opacity transition when cursor enters/leaves the viewport",
+    "Update components/MagneticButton.tsx:",
+    "  - Increase the magnetic pull area slightly (detect mouse within a padding around the button, not just inside it)",
+    "  - Add a subtle scale effect on hover (1.02x)",
+    "Add section transitions to app/page.tsx or individual sections: ensure sections flow into each other with either overlap, gradient fades, or smooth visual transitions rather than hard cuts"
+  ],
+  "acceptance_criteria": [
+    "Typography classes are refined and don't break layouts on any viewport",
+    "Navigation feels polished with smooth scroll-state transitions",
+    "Footer CTA is properly sized and has visual separation from footer content",
+    "Custom cursor hides on touch devices",
+    "Custom cursor has enhanced states (hover on links vs hover on text)",
+    "Section transitions feel smooth - no hard visual cuts between sections",
+    "npm run build passes",
+    "npm run lint passes"
+  ],
+  "verification": [
+    "npm run build",
+    "npm run lint"
+  ],
+  "blocked_reason": null,
+  "findings": "All changes verified with npm run build (11/11 pages compiled) and npm run lint (0 errors). Typography classes refined to smaller max sizes. Custom cursor now hides on touch devices, has viewport enter/leave opacity transitions, and expands follower to 60px on heading hover. MagneticButton has 1.03x scale on hover and 20px extended detection padding. Footer CTA uses text-editorial-md, has gradient separator, and service links slide right on hover. Navigation adds shadow-sm when scrolled. Services section has border-t for visual separation from DesignShowcase."
+}

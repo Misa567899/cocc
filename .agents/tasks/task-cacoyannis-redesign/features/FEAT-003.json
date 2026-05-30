@@ -1,0 +1,46 @@
+{
+  "id": "FEAT-003",
+  "type": "feat",
+  "description": "Redesign Services and Process sections with premium interactions, better visual hierarchy, enhanced 3D hover effects, service numbering, and improved Process section visual design with better card styling and smoother horizontal scroll.",
+  "status": "completed",
+  "steps": [
+    "Rewrite components/Home/Services.tsx with enhanced design:",
+    "  - Add service index numbers (01, 02, 03...) displayed prominently on each card for visual hierarchy",
+    "  - Enhance the 3D hover effect: deeper perspective transforms, border-glow animation on hover using box-shadow with accent color",
+    "  - Add a gradient overlay that follows the mouse on hover (radial-gradient positioned at cursor)",
+    "  - Add border animation: on hover, a border-bottom or border-left animates in with accent color",
+    "  - Improve card layout: larger padding, better typography sizing, more whitespace",
+    "  - Add an arrow/icon that animates on hover (slides right with scale)",
+    "  - Cards should have a subtle entrance animation (scroll-triggered stagger from below)",
+    "  - Remove the previewImage dependency from lib/constants.ts since those images don't exist",
+    "Rewrite components/Home/Process.tsx with improved visual design:",
+    "  - Change background from gray-50 to white with a subtle top border or gradient separator",
+    "  - Redesign process cards: add a colored accent line on top of each card, better shadow depth",
+    "  - Add a step connector visual (a line or dots connecting the cards horizontally)",
+    "  - Improve the progress indicator: make it more visible and styled (thicker, with a gradient)",
+    "  - Better card hover states: scale slightly, shadow deepens, accent line grows",
+    "  - Ensure the horizontal scroll animation is smooth and well-calibrated",
+    "  - Add subtle number animation: numbers count up or fade in as cards enter viewport",
+    "Update lib/constants.ts: remove previewImage field from the services array since no images exist in /public/",
+    "Ensure both sections flow naturally into each other with consistent spacing (py-32 lg:py-48)"
+  ],
+  "acceptance_criteria": [
+    "Service cards have visible index numbers (01-06)",
+    "Service cards have enhanced 3D hover with mouse-tracking gradient overlay",
+    "Service cards have border animation on hover",
+    "No references to non-existent image files in constants.ts",
+    "Process section has improved visual design (not plain gray-50)",
+    "Process cards have accent line and better styling",
+    "Horizontal scroll in Process is smooth",
+    "Both sections have scroll-triggered entrance animations",
+    "Reduced motion is supported in both sections",
+    "npm run build passes",
+    "npm run lint passes"
+  ],
+  "verification": [
+    "npm run build",
+    "npm run lint"
+  ],
+  "blocked_reason": null,
+  "findings": "Build and lint pass cleanly. Services uses useState for mouse position tracking to drive the radial-gradient overlay. The 3D hover uses 11 degrees rotation range. Process cards use inline event handlers for hover background color since Tailwind v4 does not easily do rgba with custom values in hover states. The step connector uses a dashed border at 15% accent opacity. Reduced motion in Process sets flex-wrap and adjusts card widths via JS since ScrollTrigger pin is disabled."
+}
