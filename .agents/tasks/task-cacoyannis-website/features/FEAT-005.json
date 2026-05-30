@@ -1,0 +1,34 @@
+{
+  "id": "FEAT-005",
+  "type": "feat",
+  "description": "Polish pass: ensure all animations work correctly with proper 'use client' directives, fix any build issues, add finishing touches like magnetic buttons, mouse-follow effects on service cards, proper responsive design across all breakpoints, and accessibility attributes. Final production readiness check.",
+  "status": "pending",
+  "steps": [
+    "Audit all components for proper 'use client' directives - any component using useState, useEffect, useRef, event handlers, or GSAP must be a client component. Server components should not import client-side libraries.",
+    "Create components/MagneticButton.tsx: Reusable magnetic button component that pulls toward cursor on hover using GSAP. Apply to all CTA buttons and interactive elements across the site.",
+    "Review and fix responsive design across all pages: mobile (< 768px), tablet (768-1024px), desktop (1024px+). Ensure massive typography scales down appropriately on mobile (use clamp() or responsive vw units). Fix any overflow issues.",
+    "Add accessibility attributes throughout: proper heading hierarchy (h1-h6), aria-labels on interactive elements, focus states on all buttons/links, skip-to-content link, proper alt text on images, role attributes where needed, reduced-motion media query support (disable complex animations for users who prefer reduced motion).",
+    "Ensure all GSAP animations have proper cleanup in useEffect return functions to prevent memory leaks",
+    "Add loading states and skeleton screens where appropriate (especially for the video elements)",
+    "Review the consultation form for proper HTML5 validation attributes, proper form semantics, and accessibility (label associations, error messages, fieldset for checkbox group)",
+    "Run final npm run build and npm run lint, fix any remaining errors",
+    "Verify the production build output is clean with no warnings about missing dependencies or hydration mismatches"
+  ],
+  "acceptance_criteria": [
+    "npm run build passes with zero errors",
+    "npm run lint passes with zero errors",
+    "All client components have 'use client' directive",
+    "No hydration mismatch warnings in build output",
+    "Magnetic button component exists and is applied to CTAs",
+    "All pages are responsive from mobile to desktop",
+    "Accessibility: all images have alt text, all interactive elements are keyboard accessible, heading hierarchy is correct",
+    "GSAP animations clean up properly (no memory leaks)",
+    "Reduced motion preference is respected"
+  ],
+  "verification": [
+    "cd /projects/sandbox/cocc && npm run build",
+    "cd /projects/sandbox/cocc && npm run lint"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

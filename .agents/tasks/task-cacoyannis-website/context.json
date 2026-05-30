@@ -1,0 +1,25 @@
+{
+  "project_type": "Next.js 15 App Router with TypeScript - Premium web design studio website",
+  "language": "TypeScript",
+  "build_system": "Next.js (npm/pnpm) with App Router",
+  "test_framework": "Next.js build validation (production build as primary verification)",
+  "build_command": "cd /projects/sandbox/cocc && npm run build",
+  "test_command": "cd /projects/sandbox/cocc && npm run build && npm run lint",
+  "verification_instructions": "1. Run npm run build to verify production build succeeds. 2. Run npm run lint to check for lint errors.",
+  "snapshot_or_generated_files": null,
+  "setup_instructions": "1. cd /projects/sandbox/cocc 2. npm install 3. npm run build",
+  "environment_constraints": "OPEN_INTERNET - full access to npm registry, CDNs, etc. Node.js v22 available via nvm.",
+  "contribution_requirements": "Greenfield project - no existing contribution guidelines.",
+  "key_patterns": "Next.js 15 App Router conventions: app/ directory for routes, components/ for reusable UI, lib/ for utilities. GSAP for animations. CSS Modules or Tailwind for styling.",
+  "relevant_files": [
+    "app/layout.tsx",
+    "app/page.tsx",
+    "app/services/[slug]/page.tsx",
+    "app/contact/page.tsx",
+    "components/",
+    "lib/",
+    "styles/",
+    "public/"
+  ],
+  "directory_structure": "app/ - Next.js App Router pages and layouts | components/ - Reusable UI components (Navigation, Footer, Cursor, Modal, etc.) | lib/ - Utility functions, animation helpers, constants | styles/ - Global styles and CSS modules | public/ - Static assets (images, videos, fonts)"
+}

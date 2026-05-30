@@ -1,0 +1,31 @@
+{
+  "id": "FEAT-002",
+  "type": "feat",
+  "description": "Build the premium navigation system with mega menu for services dropdown, animated mobile menu, and the consultation request modal with form. This includes the full header component with logo placeholder, navigation links, services mega menu with image/video previews, and the animated modal form for requesting consultations.",
+  "status": "pending",
+  "steps": [
+    "Create components/Navigation/Navigation.tsx: Fixed header with transparent-to-solid background on scroll. Contains: logo placeholder (text 'CACOYANNIS LIMITED' styled as mark, easy to replace with image), main nav links (Home, Services dropdown trigger, Contact), and 'Request Consultation' CTA button. Use GSAP for entrance animation and scroll-based background transition.",
+    "Create components/Navigation/MegaMenu.tsx: Premium mega menu that opens on Services hover/click. Full-width dropdown with: left column listing all 6 services (Website Design, UI/UX Design, Website Development, Frontend Development, E-Commerce Development, Custom Web Applications) with hover states, right column showing image/video preview that changes based on hovered service, descriptions for each service. Animated open/close with GSAP (stagger, clip-path reveal). Each service links to /services/[slug].",
+    "Create components/Navigation/MobileMenu.tsx: Full-screen mobile menu overlay with GSAP-animated staggered link reveals, services accordion, and consultation CTA. Triggered by hamburger icon on mobile.",
+    "Create components/ConsultationModal/ConsultationModal.tsx: Animated modal overlay that opens when 'Request Consultation' is clicked. GSAP entrance (scale + fade or clip-path reveal). Contains the consultation form.",
+    "Create components/ConsultationModal/ConsultationForm.tsx: Form with fields - First Name, Last Name, Company Name, Email, Phone, Message (textarea), Services Required (multiple selection checkboxes for all 6 services). Form action sends to ceo@cacoyannis.co.uk. Styled inputs with animated labels/borders on focus. Submit button with magnetic hover effect. Client-side validation. Success state animation.",
+    "Create lib/constants.ts with: services data array (name, slug, description, preview image/video URL placeholder for each of the 6 services), company info (name, email, phone, address, website), navigation links array",
+    "Integrate Navigation into app/layout.tsx so it appears on all pages",
+    "Verify: npm run build passes with all new components"
+  ],
+  "acceptance_criteria": [
+    "Navigation renders on all pages with logo text, nav links, and CTA button",
+    "Mega menu opens on Services interaction showing all 6 services with previews",
+    "Mobile menu works as full-screen overlay with staggered animations",
+    "Consultation modal opens with animation and contains all required form fields",
+    "Form includes all fields: First Name, Last Name, Company Name, Email, Phone, Message, Services Required (multi-select)",
+    "Services data is centralized in lib/constants.ts for reuse across pages",
+    "npm run build passes successfully"
+  ],
+  "verification": [
+    "cd /projects/sandbox/cocc && npm run build",
+    "cd /projects/sandbox/cocc && npm run lint"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

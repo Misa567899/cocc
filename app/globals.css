@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #FFFFFF;
+  --color-foreground: #000000;
+  --color-accent: #050FA3;
+  --color-accent-light: #1a2fd4;
+  --color-muted: #6B7280;
+  --color-border: #E5E7EB;
+
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  --cursor-size: 12px;
+  --cursor-follower-size: 40px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: #FFFFFF;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent);
+  border-radius: 3px;
+}
+
+/* Utility classes for editorial typography */
+.text-editorial-xl {
+  font-size: clamp(3rem, 12vw, 12rem);
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+.text-editorial-lg {
+  font-size: clamp(2.5rem, 8vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.text-editorial-md {
+  font-size: clamp(2rem, 5vw, 5rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}

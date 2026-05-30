@@ -1,0 +1,35 @@
+{
+  "id": "FEAT-004",
+  "type": "feat",
+  "description": "Build the dynamic service pages (6 pages using a single dynamic route) and the Contact page with interactive map, animated contact cards, and consultation CTA. Complete all remaining pages to make the site fully navigable.",
+  "status": "pending",
+  "steps": [
+    "Create lib/services-data.ts: Detailed data for each of the 6 services including: slug, title, headline, description paragraphs, key features/capabilities list, process steps specific to that service, related services, placeholder hero image/video URL. Services: website-design, ui-ux-design, website-development, frontend-development, e-commerce-development, custom-web-applications.",
+    "Create app/services/[slug]/page.tsx: Dynamic service page with generateStaticParams for all 6 slugs. Layout includes: Hero section with service name in massive typography + background video/image, description section with animated text reveals, capabilities/features grid with stagger animations, process breakdown specific to that service, CTA section linking to consultation modal, related services links. Each section uses ScrollTrigger for entrance animations.",
+    "Create components/Services/ServiceHero.tsx: Service page hero with massive title typography (word reveal animation), subtitle, and background visual. Similar energy to home hero but service-specific.",
+    "Create components/Services/ServiceContent.tsx: Main content area with: description paragraphs (text reveal on scroll), capabilities grid (cards with hover effects, stagger in), process steps for that specific service.",
+    "Create components/Services/ServiceCTA.tsx: Bottom CTA section with large text ('Ready to start your [service] project?'), consultation button that triggers the modal, related services links.",
+    "Create app/contact/page.tsx: Contact page with: hero section with 'Get In Touch' massive typography, interactive map section (embed placeholder or styled div with address pin), animated contact cards (email card, phone card, address card - each with hover lift effect and icon), office hours, and a prominent 'Request Consultation' CTA that opens the modal. All elements animate in with ScrollTrigger.",
+    "Create components/Contact/ContactHero.tsx: Contact page hero with large typography and subtitle animation.",
+    "Create components/Contact/ContactCards.tsx: Grid of contact method cards (Email, Phone, Address) with: icon, label, value, hover animation (lift + shadow), click-to-copy or click-to-action (mailto, tel). Stagger animation on scroll.",
+    "Create components/Contact/ContactMap.tsx: Interactive map section - use a styled placeholder div with the company address (Unit 13 Freeland Park, Wareham Road, Lytchett Matravers, Poole, BH16 6FA) that can be replaced with a real map embed later. Style it as a dark/minimal map aesthetic.",
+    "Update components/Navigation to ensure all links work: Home (/), Services mega menu items (/services/[slug]), Contact (/contact)",
+    "Add generateMetadata to each page for proper SEO (title, description, OpenGraph)",
+    "Verify: npm run build passes with all pages generating correctly"
+  ],
+  "acceptance_criteria": [
+    "All 6 service pages render at /services/website-design, /services/ui-ux-design, /services/website-development, /services/frontend-development, /services/e-commerce-development, /services/custom-web-applications",
+    "Service pages have hero, content, capabilities, and CTA sections with animations",
+    "Contact page renders at /contact with hero, contact cards, map placeholder, and CTA",
+    "Contact cards show email (ceo@cacoyannis.co.uk), phone (+44 7491 319927), and address",
+    "All navigation links work correctly across the site",
+    "Each page has proper SEO metadata",
+    "npm run build passes with all static pages generated"
+  ],
+  "verification": [
+    "cd /projects/sandbox/cocc && npm run build",
+    "cd /projects/sandbox/cocc && npm run lint"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}
