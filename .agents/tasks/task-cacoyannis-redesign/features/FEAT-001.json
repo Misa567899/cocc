@@ -1,0 +1,36 @@
+{
+  "id": "FEAT-001",
+  "type": "feat",
+  "description": "Complete Hero section redesign - replace dark video background hero with a clean, editorial, white-background typographic hero inspired by Refokus/Clay/Studio Freight. Remove broken video reference, implement premium typography composition with better hierarchy, add subtle CSS-generated visual elements, and integrate advanced GSAP entrance animations.",
+  "status": "in_progress",
+  "steps": [
+    "Completely rewrite components/Home/Hero.tsx - remove the dark video background approach and replace with a white/light editorial layout",
+    "Design typography composition: Use a large but NOT oversized headline (text-editorial-lg rather than text-editorial-xl), with balanced spacing. The hero message should be: 'We design and build exceptional websites and digital experiences'",
+    "Create a split-layout hero: left side has the main headline with editorial typography (large, bold, tight leading), right side has a short descriptor paragraph and a CTA button",
+    "Add subtle CSS-generated visual accents: a geometric SVG pattern or animated gradient shapes that float/move subtly, an accent line or dot-grid background at very low opacity",
+    "Implement GSAP staggered entrance animation: headline words reveal from bottom one by one, subtitle fades up, CTA slides in, decorative elements animate in with delay",
+    "Add a scroll-driven parallax effect on the decorative elements as user scrolls down",
+    "Add a mouse-follow subtle effect on decorative elements (they shift slightly based on cursor position)",
+    "Ensure the hero has proper vertical rhythm: min-h-screen with content vertically centered, generous padding-top to clear the fixed nav (pt-32 or more)",
+    "Include a scroll indicator at the bottom that animates (subtle bounce)",
+    "Ensure reduced-motion support: show all elements immediately without animation when prefers-reduced-motion is active",
+    "Remove ALL references to /videos/hero-reel.mp4 which does not exist"
+  ],
+  "acceptance_criteria": [
+    "Hero has white/light background - no dark video overlay",
+    "No references to non-existent video or image files",
+    "Typography is editorial but NOT oversized - uses text-editorial-lg or custom clamp sizes that fit well",
+    "Layout feels spacious and premium, not cramped",
+    "GSAP animations play on load with proper sequencing",
+    "Reduced motion is respected",
+    "Hero communicates clearly what CACOYANNIS LIMITED does",
+    "npm run build passes without errors",
+    "npm run lint passes without errors"
+  ],
+  "verification": [
+    "npm run build",
+    "npm run lint"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}
